@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>UJV Travel & Events Agenda</title>
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <div class="app">
+
+    <!-- HEADER -->
+
+    <header>
+      <h1>✈️ UJV Travel & Events Agenda</h1>
+      <p>Travel, FAM Trips, Events & Business Development Management</p>
+    </header>
+
+
+    <!-- ADD NEW ACTIVITY -->
+
+    <section class="form-section">
+
+      <h2>Add New Activity</h2>
+
+      <div class="form-grid">
+
+        <div class="form-group">
+          <label for="activityType">Activity Type</label>
+
+          <select id="activityType">
+            <option value="FAM">FAM</option>
+            <option value="Webinar">Webinar</option>
+            <option value="Event">Event</option>
+            <option value="Roadshow">Roadshow</option>
+            <option value="Sales Call">Sales Call</option>
+            <option value="Trip">Trip</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="activityName">Activity / Trip Name</label>
+
+          <input
+            type="text"
+            id="activityName"
+            placeholder="Example: Portugal FAM – Aurora">
+        </div>
+
+
+        <div class="form-group">
+          <label for="participant">Participant</label>
+
+          <input
+            type="text"
+            id="participant"
+            placeholder="Participant name">
+        </div>
+
+
+        <div class="form-group">
+          <label for="directorHost">Director Name / UJV Host</label>
+
+          <input
+            type="text"
+            id="directorHost"
+            placeholder="Example: Kevin Peyrache">
+        </div>
+
+
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+
+          <input
+            type="date"
+            id="startDate">
+        </div>
+
+
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+
+          <input
+            type="date"
+            id="endDate">
+        </div>
+
+
+        <div class="form-group">
+          <label for="time">Time</label>
+
+          <input
+            type="time"
+            id="time">
+        </div>
+
+
+        <div class="form-group">
+          <label for="event">Event / Activity</label>
+
+          <input
+            type="text"
+            id="event"
+            placeholder="Example: Hotel Site Inspection">
+        </div>
+
+
+        <div class="form-group">
+          <label for="destination">Destination</label>
+
+          <input
+            type="text"
+            id="destination"
+            placeholder="Example: Lisbon, Portugal">
+        </div>
+
+
+        <div class="form-group">
+          <label for="hotel">Hotel / Property</label>
+
+          <input
+            type="text"
+            id="hotel"
+            placeholder="Hotel or property name">
+        </div>
+
+
+        <div class="form-group">
+          <label for="flight">Flight Information</label>
+
+          <input
+            type="text"
+            id="flight"
+            placeholder="Example: AA 123 – MIA to LIS">
+        </div>
+
+
+        <div class="form-group">
+          <label for="status">Status</label>
+
+          <select id="status">
+            <option value="Confirmed">Confirmed</option>
+            <option value="Pending">Pending</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+
+        <div class="form-group full-width">
+
+          <label for="notes">Notes</label>
+
+          <textarea
+            id="notes"
+            placeholder="Additional notes..."></textarea>
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="button"
+        id="addEventButton"
+        class="add-button">
+
+        + Add Activity
+
+      </button>
+
+    </section>
+
+
+    <!-- VIEW CONTROLS -->
+
+    <section class="view-section">
+
+      <div class="view-controls">
+
+        <div class="view-buttons">
+
+          <button
+            type="button"
+            id="calendarViewButton"
+            class="view-button active">
+
+            📅 Calendar View
+
+          </button>
+
+
+          <button
+            type="button"
+            id="listViewButton"
+            class="view-button">
+
+            📋 List View
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CALENDAR -->
+
+    <section
+      class="calendar-section"
+      id="calendarSection">
+
+      <div class="calendar-header">
+
+        <button
+          type="button"
+          id="previousMonth"
+          class="month-button">
+
+          ‹
+
+        </button>
+
+
+        <div class="calendar-title">
+
+          <h2 id="calendarMonth">
+            October 2026
+          </h2>
+
+          <button
+            type="button"
+            id="todayButton"
+            class="today-button">
+
+            Today
+
+          </button>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="nextMonth"
+          class="month-button">
+
+          ›
+
+        </button>
+
+      </div>
+
+
+      <div class="calendar-weekdays">
+
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+        <div>Sun</div>
+
+      </div>
+
+
+      <div
+        id="calendarGrid"
+        class="calendar-grid">
+      </div>
+
+
+      <div
+        id="selectedDay"
+        class="selected-day">
+      </div>
+
+    </section>
+
+
+    <!-- LIST -->
+
+    <section
+      class="events-section"
+      id="listSection">
+
+      <div class="section-title">
+
+        <h2>My Activities</h2>
+
+        <span id="eventCount">
+          0 activities
+        </span>
+
+      </div>
+
+
+      <div id="eventsList">
+
+        <div class="empty-message">
+          No activities added yet.
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+  <script src="./script.js"></script>
+
+</body>
+
+</html>
