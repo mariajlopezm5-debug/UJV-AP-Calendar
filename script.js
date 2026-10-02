@@ -1092,7 +1092,7 @@ function showCalendarView() {
 async function loadEvents() {
 
   const { data, error } = await supabaseClient
-    .from(".from("UJV_AP_Calendar")")
+  .from("UJV_AP_Calendar")
     .select("*")
     .order("start_date", { ascending: true });
 
