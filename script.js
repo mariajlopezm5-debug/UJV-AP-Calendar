@@ -131,7 +131,7 @@ async function saveEvents() {
   const item = events[events.length - 1];
 
   const { error } = await supabaseClient
-    UJV_AP_Calendar
+    .from("UJV_AP_Calendar")
     .insert({
       activity_type: item.activityType,
       activity_name: item.activityName,
@@ -1092,7 +1092,7 @@ function showCalendarView() {
 async function loadEvents() {
 
   const { data, error } = await supabaseClient
-    .from("UJV_AP_Calendar")
+    .from(".from("UJV_AP_Calendar")")
     .select("*")
     .order("start_date", { ascending: true });
 
