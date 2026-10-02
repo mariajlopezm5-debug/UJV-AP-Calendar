@@ -2,8 +2,7 @@
    DATA
 ========================= */
 
-let events =
-  JSON.parse(localStorage.getItem("ujvEvents")) || [];
+let events = [];
 
 
 /* =========================
@@ -120,11 +119,6 @@ function addEvent() {
 ========================= */
 
 function saveEvents() {
-
-  localStorage.setItem(
-    "ujvEvents",
-    JSON.stringify(events)
-  );
 
 }
 
@@ -1180,9 +1174,4 @@ document
 /* =========================
    INITIAL LOAD
 ========================= */
-
-displayEvents();
-
-renderCalendar();
-
 showCalendarView();
