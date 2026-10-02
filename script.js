@@ -1089,7 +1089,44 @@ function escapeHtml(value) {
 ========================= */
 
 function showCalendarView() {
+async function loadEvents() {
 
+  const { data, error } = await supabaseClient
+    .from("activities")
+    .select("*")
+    .order("start_date", { ascending: true });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  events = data.map(function(item) {
+
+    return {
+      activityType: item.activity_type,
+      activityName: item.activity_name,
+      participant: item.participant,
+      directorHost: item.director_host,
+      startDate: item.start_date,
+      endDate: item.end_date,
+      time: item.time,
+      eventActivity: item.event_activity,
+      destination: item.destination,
+      hotel: item.hotel,
+      flight: item.flight,
+      status: item.status,
+      notes: item.notes
+    };
+
+  });
+
+  displayEvents();
+  renderCalendar();
+
+}
+
+loadEvents();
   document
     .getElementById("calendarSection")
     .style.display = "block";
