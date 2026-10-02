@@ -2,6 +2,14 @@
    DATA
 ========================= */
 
+const SUPABASE_URL = "https://fviqworvxosnbwbddnjp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_WQ73kA57RHRjmwqZTrE8dA_iNfysoPc";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
 let events = [];
 
 
@@ -118,7 +126,32 @@ function addEvent() {
    SAVE
 ========================= */
 
-function saveEvents() {
+async function saveEvents() {
+
+  const item = events[events.length - 1];
+
+  const { error } = await supabaseClient
+    .from("activities")
+    .insert({
+      activity_type: item.activityType,
+      activity_name: item.activityName,
+      participant: item.participant,
+      director_host: item.directorHost,
+      start_date: item.startDate,
+      end_date: item.endDate || null,
+      time: item.time,
+      event_activity: item.eventActivity,
+      destination: item.destination,
+      hotel: item.hotel,
+      flight: item.flight,
+      status: item.status,
+      notes: item.notes
+    });
+
+  if (error) {
+    console.error(error);
+    alert("Could not save the activity.");
+  }
 
 }
 
