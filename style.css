@@ -807,7 +807,12 @@ h2 {
     </section>
 
   </div>
-
+.ujv-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
+}
 
   <script src="./script.js"></script>
 
