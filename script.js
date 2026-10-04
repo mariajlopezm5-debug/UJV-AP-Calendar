@@ -165,11 +165,7 @@ function displayEvents() {
    const directorFilter = document.getElementById("directorFilter");
    const selectedDirector = directorFilter ? directorFilter.value : "all";
 
-   const filteredEvents = selectedDirector === "all"
-  ? events
-  : events.filter(function(event) {
-      return event.directorHost === selectedDirector;
-    });
+const filteredEvents = events;
    
   const eventsList =
     document.getElementById("eventsList");
