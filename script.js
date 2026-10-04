@@ -382,7 +382,6 @@ const { error } = await supabaseClient
   .from("UJV_AP_Calendar")
   .delete()
   .eq("activity_name", item.activityName)
-  .eq("participant", item.participant)
   .eq("start_date", item.startDate);
 
 if (error) {
