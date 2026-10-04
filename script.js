@@ -162,6 +162,15 @@ async function saveEvents() {
 
 function displayEvents() {
 
+   const directorFilter = document.getElementById("directorFilter");
+   const selectedDirector = directorFilter ? directorFilter.value : "all";
+
+   const filteredEvents = selectedDirector === "all"
+  ? events
+  : events.filter(function(event) {
+      return event.directorHost === selectedDirector;
+    });
+   
   const eventsList =
     document.getElementById("eventsList");
 
@@ -176,7 +185,7 @@ function displayEvents() {
 
   if (eventCount) {
 
-    const number = events.length;
+    const number = filteredEvents.length;
 
     eventCount.textContent =
       number === 1
@@ -186,7 +195,7 @@ function displayEvents() {
   }
 
 
-  if (events.length === 0) {
+  if (filteredEvents.length === 0) {
 
     eventsList.innerHTML = `
 
@@ -1135,12 +1144,44 @@ async function loadEvents() {
 
   });
 
+   const directorFilter = document.getElementById("directorFilter");
+
+if (directorFilter) {
+  const directors = [...new Set(
+    events
+      .map(function(event) {
+        return event.directorHost;
+      })
+      .filter(function(name) {
+        return name && name.trim() !== "";
+      })
+  )].sort();
+
+  directorFilter.innerHTML =
+    '<option value="all">All Directors</option>';
+
+  directors.forEach(function(name) {
+    const option = document.createElement("option");
+    option.value = name;
+    option.textContent = name;
+    directorFilter.appendChild(option);
+  });
+}
   displayEvents();
   renderCalendar();
 
 }
 
 loadEvents();
+   
+   const directorFilter = document.getElementById("directorFilter");
+
+if (directorFilter) {
+  directorFilter.addEventListener("change", function() {
+    displayEvents();
+  });
+}
+   
   document
     .getElementById("calendarSection")
     .style.display = "block";
