@@ -534,6 +534,9 @@ function eventOccursOnDate(item, dateString) {
 
 function renderCalendar() {
 
+const directorFilter = document.getElementById("directorFilter");
+const selectedDirector = directorFilter ? directorFilter.value : "all";
+
   const calendarGrid =
     document.getElementById("calendarGrid");
 
@@ -777,23 +780,25 @@ function createCalendarDay(
   `;
 
 
-  const dayEvents =
-    events.filter(function(item) {
+const dayEvents =
+  events.filter(function(item) {
 
-      return eventOccursOnDate(
-        item,
-        key
-      );
+    return eventOccursOnDate(
+      item,
+      key
+    ) &&
+    (
+      selectedDirector === "all" ||
+      item.directorHost === selectedDirector
+    );
 
-    });
-
+  });
 
   /*
     Show up to 3 activities
   */
 
-  const visibleEvents =
-    dayEvents.slice(0, 3);
+const visibleEvents = dayEvents;
 
 
   visibleEvents.forEach(function(item) {
