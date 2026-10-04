@@ -717,14 +717,14 @@ const selectedDirector = directorFilter ? directorFilter.value : "all";
 ========================= */
 
 function createCalendarDay(
-
-const directorFilter = document.getElementById("directorFilter");
-const selectedDirector = directorFilter ? directorFilter.value : "all";
   day,
   month,
   year,
   otherMonth
 ) {
+
+  const directorFilter = document.getElementById("directorFilter");
+  const selectedDirector = directorFilter ? directorFilter.value : "all";
 
   const calendarGrid =
     document.getElementById(
