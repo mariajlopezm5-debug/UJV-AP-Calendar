@@ -1185,7 +1185,83 @@ loadEvents();
    document
   .getElementById("exportButton")
   .addEventListener("click", function () {
-    alert("Export function is ready!");
+
+    const directorFilter =
+      document.getElementById("directorFilter");
+
+    const selectedDirector =
+      directorFilter ? directorFilter.value : "all";
+
+    const exportEvents =
+      selectedDirector === "all"
+        ? events
+        : events.filter(function(event) {
+            return event.directorHost === selectedDirector;
+          });
+
+    const headers = [
+      "Activity Type",
+      "Activity / Trip Name",
+      "Participant",
+      "Director / UJV Host",
+      "Start Date",
+      "End Date",
+      "Time",
+      "Event / Activity",
+      "Destination",
+      "Hotel / Property",
+      "Flight Information",
+      "Status",
+      "Notes"
+    ];
+
+    const rows = exportEvents.map(function(event) {
+      return [
+        event.activityType,
+        event.activityName,
+        event.participant,
+        event.directorHost,
+        event.startDate,
+        event.endDate,
+        event.time,
+        event.eventActivity,
+        event.destination,
+        event.hotel,
+        event.flight,
+        event.status,
+        event.notes
+      ];
+    });
+
+    const csvContent = [
+      headers,
+      ...rows
+    ]
+      .map(function(row) {
+        return row.map(function(value) {
+          return `"${String(value || "")
+            .replace(/"/g, '""')}"`;
+        }).join(",");
+      })
+      .join("\n");
+
+    const blob = new Blob(
+      [csvContent],
+      { type: "text/csv;charset=utf-8;" }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "UJV_Travel_Events_Calendar.csv";
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
   });
    
    const directorFilter = document.getElementById("directorFilter");
