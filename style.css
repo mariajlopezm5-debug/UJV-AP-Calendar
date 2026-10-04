@@ -808,8 +808,8 @@ h2 {
 
   </div>
 .ujv-logo {
-  width: 15px;
-  height: auto;
+  width: 80px !important;
+  height: auto !important;
   display: block;
   margin: 0 auto 10px;
 }
