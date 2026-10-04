@@ -215,7 +215,7 @@ function displayEvents() {
 
 
   const sortedEvents =
-    [...events].sort(function(a, b) {
+      [...filteredEvents].sort(function(a, b) {
 
       return a.startDate.localeCompare(
         b.startDate
