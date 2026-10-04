@@ -1312,8 +1312,10 @@ function showListView() {
 
 
   document
-    .getElementById("listViewButton")
-    .classList.add("active");
+     .getElementById("listViewButton")
+     .classList.add("active");
+
+displayEvents();
 
 }
 
