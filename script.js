@@ -1260,8 +1260,6 @@ loadEvents();
     URL.revokeObjectURL(url);
   });
    
-   const directorFilter = document.getElementById("directorFilter");
-
 if (directorFilter) {
   directorFilter.addEventListener("change", function() {
     displayEvents();
