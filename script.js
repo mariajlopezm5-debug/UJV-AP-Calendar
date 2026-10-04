@@ -359,7 +359,7 @@ function displayEvents() {
    DELETE
 ========================= */
 
-function deleteEvent(index) {
+async function deleteEvent(index) {
 
   const confirmation =
     confirm(
@@ -372,9 +372,24 @@ function deleteEvent(index) {
   }
 
 
-  events.splice(index, 1);
+const item = events[index];
 
-  saveEvents();
+events = events.filter(function(event) {
+  return event !== item;
+});
+
+const { error } = await supabaseClient
+  .from("UJV_AP_Calendar")
+  .delete()
+  .eq("activity_name", item.activityName)
+  .eq("participant", item.participant)
+  .eq("start_date", item.startDate);
+
+if (error) {
+  console.error(error);
+  alert("Could not delete the activity.");
+  return;
+}
 
   displayEvents();
 
