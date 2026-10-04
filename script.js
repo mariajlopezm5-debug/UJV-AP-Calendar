@@ -1179,6 +1179,12 @@ if (directorFilter) {
 
 loadEvents();
    
+   document
+  .getElementById("exportButton")
+  .addEventListener("click", function () {
+    alert("Export function is ready!");
+  });
+   
    const directorFilter = document.getElementById("directorFilter");
 
 if (directorFilter) {
