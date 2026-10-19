@@ -448,18 +448,29 @@ function displayEvents() {
 
  
 
-   const directorFilter = document.getElementById("directorFilter");
+const directorFilter = document.getElementById("directorFilter");
+const selectedDirector = directorFilter ? directorFilter.value : "all";
 
-   const selectedDirector = directorFilter ? directorFilter.value : "all";
+const activitySearch = document.getElementById("activitySearch");
+const searchTerm = activitySearch
+    ? activitySearch.value.trim().toLowerCase()
+    : "";
 
- 
+const filteredEvents = events.filter(event => {
+    const matchesDirector =
+        selectedDirector === "all" ||
+        event.directorHost === selectedDirector;
 
-const filteredEvents = selectedDirector === "all"
+    const searchableText = [
+        event.activityName,
+        event.eventActivity,
+        event.directorHost
+    ].filter(Boolean).join(" ").toLowerCase();
 
-    ? events
+    const matchesSearch = searchableText.includes(searchTerm);
 
-    : events.filter(event => event.directorHost === selectedDirector);
-
+    return matchesDirector && matchesSearch;
+});
    
 
   const eventsList =
