@@ -1667,31 +1667,28 @@ function createCalendarDay(
 
  
 
-const dayEvents =
+const activitySearch = document.getElementById("activitySearch");
+const searchTerm = activitySearch
+  ? activitySearch.value.trim().toLowerCase()
+  : "";
 
-  events.filter(function(item) {
+const dayEvents = events.filter(function(item) {
+  const matchesDate = eventOccursOnDate(item, key);
 
- 
+  const matchesDirector =
+    selectedDirector === "all" ||
+    item.directorHost === selectedDirector;
 
-    return eventOccursOnDate(
+  const searchableText = [
+    item.activityName,
+    item.eventActivity,
+    item.directorHost
+  ].filter(Boolean).join(" ").toLowerCase();
 
-      item,
+  const matchesSearch = searchableText.includes(searchTerm);
 
-      key
-
-    ) &&
-
-    (
-
-      selectedDirector === "all" ||
-
-      item.directorHost === selectedDirector
-
-    );
-
- 
-
-  });
+  return matchesDate && matchesDirector && matchesSearch;
+});
 
  
 
@@ -2457,6 +2454,10 @@ document.getElementById("directorFilter")?.addEventListener("change", function (
 
 });
 
- 
+ // SEARCH ACTIVITIES
+document.getElementById("activitySearch")?.addEventListener("input", function () {
+  displayEvents();
+  renderCalendar();
+});
 
 loadEvents();
